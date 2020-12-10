@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { CartCtxConsumer } from "../../CartContext";
 import CartItem from "./CartItem";
 
@@ -14,7 +14,7 @@ function Cart(){
     return(
         <CartCtxConsumer>{cartCtx => (
             
-            cartCtx.cart.length == 0 ?
+            cartCtx.cart.length === 0 ?
             <div className="table-responsive">no hay items ameo</div> :
             <div className="table-responsive">
             <table className="table table-sm">
