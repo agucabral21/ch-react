@@ -26,11 +26,8 @@ function ItemDetailContainer({init}) {
     return( 
     
     <Container variant="light" bg="secondary" >        
-        { !showCard ? 
-            <Spinner  animation="border" /> : null }
-        { showCard ?
-            <ItemDetail item={item}/>
-        : null }       
+        { !showCard && <Spinner  animation="border" /> }
+        {  showCard && <ItemDetail item={item}/> }       
     </Container>
    
 )   

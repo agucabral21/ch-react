@@ -45,7 +45,7 @@ function ItemList() {
                 </tr>
                 </thead>
                 <tbody>
-                    {productArray.map(i => <Item key={i.id} prod={i} />)}
+                    {productArray.map(i => <Item key={i.id} item={i} />)}
                 </tbody>
             </table>
         </div>

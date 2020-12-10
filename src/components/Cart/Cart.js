@@ -1,31 +1,42 @@
 import React, {useEffect, useState} from "react";
 import { CartCtxConsumer } from "../../CartContext";
-import Item from "../Item/Item.js";
+import CartItem from "./CartItem";
 
 
 function Cart(){
-    const [productArray,setProductArray] = useState([]);
+
+    function generateCartItems(cartItemsArray){        
+        return cartItemsArray.map(iCart => {           
+            return  <CartItem cartItem={iCart}/>
+        })        
+    } 
+
     return(
-<CartCtxConsumer>{cartCtx => (
-        <div className="table-responsive">
-        <table className="table table-sm">
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Color</th>
-                <th scope="col">Detalle</th>
-            </tr>
-            </thead>
-            <tbody>
-{cartCtx.cart.map(i => { console.log(i); return <Item key={i.item.id} prod={i.item} />})}
-            </tbody>
-        </table>
-        </div>)}
+        <CartCtxConsumer>{cartCtx => (
+            
+            cartCtx.cart.length == 0 ?
+            <div className="table-responsive">no hay items ameo</div> :
+            <div className="table-responsive">
+            <table className="table table-sm">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Cantidad</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {generateCartItems(cartCtx.cart)}
+                </tbody>
+            </table>
+            </div>
+            
+            )}
         </CartCtxConsumer>
     )
-
 };
 
 export default Cart;

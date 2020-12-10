@@ -1,15 +1,15 @@
 import React, {} from "react";
-import {NavLink} from 'react-router-dom';
+import {NavLink} from "react-router-dom";
 
-function Item({prod}) {
+function Item({item}) {
 
   return (   
     <tr>
-      <th scope="row"><span className="nav-link">{prod.id}</span></th>
-        <td> <span className="nav-link">{prod.name}</span></td>
-        <td> <span>{prod.description}</span></td>
-        <td> <span className="nav-link">{prod.color}</span></td>
-        <td><NavLink to={'/item/'+prod.id}>  <span className="nav-link">Ver</span> </NavLink></td>
+      <th scope="row"><span className="nav-link">{item.id}</span></th>
+        <td> <span className="nav-link">{item.name}</span></td>
+        <td> <span>{item.description}</span></td>
+        <td> <span className="nav-link">{item.color}</span></td>
+        <td><NavLink to={'/item/'+item.id}>  <span className="nav-link">Ver</span> </NavLink></td>
     </tr>);
   }  
 export default Item;

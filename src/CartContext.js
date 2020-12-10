@@ -1,4 +1,6 @@
 import React, {useState} from "react";
+
+//https://www.freecodecamp.org/news/react-context-in-5-minutes/
 const { Provider, Consumer } = React.createContext();
 
 function CartCtxProvider({children}) {
@@ -15,7 +17,7 @@ function CartCtxProvider({children}) {
     } 
 
     return(
-      <Provider value={{cart: cart, addItem: addItem }}>
+      <Provider value={{cart, addItem}}>
         {children}
       </Provider>
     )

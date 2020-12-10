@@ -68,7 +68,7 @@ const getProducts =  (cat) =>  new Promise((resolve,reject) => {
                                         [getRandomProduct()] :                                        
                                         products.filter(x => x.category === cat || cat === "all")
                                     );                                
-                                },1000)
+                                },0)
                          });
 
 const getRandomProduct = () => {   
@@ -82,7 +82,7 @@ const getProduct = (id) => new Promise((resolve,reject) => {
         setTimeout(() =>{
             console.log("Se invoco getProduct");
             resolve(products.find(x => x.id === id))        
-        },1000)
+        },0)
     });
 
 export {getProducts, getProduct};
