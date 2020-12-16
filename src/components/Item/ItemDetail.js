@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import {Card,ButtonGroup,ButtonToolbar,Button} from "react-bootstrap";
 import ItemCount from "./ItemCount";
-
 import {CartCtxConsumer} from "../../contexts/CartContext";
 
 function ItemDetail({item}) {
@@ -12,7 +11,7 @@ function ItemDetail({item}) {
         <CartCtxConsumer>
         {cartCtx => (
             <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={item.imageId} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL+"/images/"+item.imageId} />
                 <hr/>
                 <Card.Body>
                 <Card.Title>{item.label}</Card.Title>

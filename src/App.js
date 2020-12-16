@@ -16,7 +16,9 @@ function App() {
         <Switch>        
           <Route exact path="/"> <ItemList DB={firebase}/> </Route>         
           <Route path="/category/:id" component={ItemList}/>           
-          <Route path="/item/:itemId" component={ItemDetailContainer}/>          
+          <Route path="/item/:itemId">
+            <ItemDetailContainer DB={firebase}/>
+          </Route>          
           <Route path="/cart" component={Cart}/>
         </Switch> 
          )}</FirebaseContext.Consumer>       

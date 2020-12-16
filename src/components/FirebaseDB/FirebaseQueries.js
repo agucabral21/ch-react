@@ -1,5 +1,5 @@
 function getAllItems(DB){
-    const items = DB.collection("istems");
+    const items = DB.collection("items");
     return new Promise((resolve,reject)=>{
         items.get().then((result)=>{        
             if(result.size === 0){            
@@ -18,4 +18,15 @@ function getAllItems(DB){
     });
 };
 
-export {getAllItems};
+function getItemById(DB,id){
+    const items = DB.collection("items");
+    return new Promise((resolve,reject)=>{
+        items
+        .doc(id)
+        .get()
+        .then(e => resolve(e.data()));
+           
+    })    
+};
+
+export {getAllItems,getItemById};
