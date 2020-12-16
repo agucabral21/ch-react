@@ -1,24 +1,27 @@
 import React, {useEffect, useState} from "react";
 import Item from "./Item.js";
-import  {getProducts} from "../../services/restServices";
+//import  {getProducts} from "../../services/restServices";
 import { Spinner, Container,Dropdown } from "react-bootstrap";
+import {getAllItems} from "../FirebaseDB/FirebaseQueries"
 
-function ItemList() {
+function ItemList({DB}) {
     
     const [productArray,setProductArray] = useState([]);
     const [category,setCategory] = useState("all");
-    const [loading,setLoading] = useState(true);
+    const [loading,setLoading] = useState(true);    
 
-    function loadProducts(){        
-        setLoading(true)
-        getProducts(category).then(res => {
-            setProductArray(res);
+    function loadProducts(){
+        setLoading(true)       
+        getAllItems(DB).then(res =>{            
+            setProductArray(res)
+            setLoading(false)
+        }).catch((e) => {
             setLoading(false);
-        }) 
+            alert(e);
+        })      
     }
-    
-    useEffect(loadProducts,[category]);   
-    
+   
+    useEffect(loadProducts,[category]);  
 
     return (   
         <Container>
@@ -37,11 +40,9 @@ function ItemList() {
             <table className="table table-sm">
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Color</th>
-                    <th scope="col">Detalle</th>
+                    <th scope="col">Stock</th>
                 </tr>
                 </thead>
                 <tbody>

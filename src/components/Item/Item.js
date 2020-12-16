@@ -5,11 +5,9 @@ function Item({item}) {
 
   return (   
     <tr>
-      <th scope="row"><span className="nav-link">{item.id}</span></th>
-        <td> <span className="nav-link">{item.name}</span></td>
+        <td><NavLink to={'/item/'+item.id}>  <span className="nav-link">{item.label}</span> </NavLink></td>
         <td> <span>{item.description}</span></td>
-        <td> <span className="nav-link">{item.color}</span></td>
-        <td><NavLink to={'/item/'+item.id}>  <span className="nav-link">Ver</span> </NavLink></td>
+        <td> <span className="nav-link">{item.stock}</span></td>
     </tr>);
   }  
 export default Item;

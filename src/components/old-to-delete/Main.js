@@ -37,18 +37,10 @@ function Main(){
             </nav>
             </div>   
         <Switch>
-          <Route exact path="/">
-            <ItemList/>
-          </Route>
-          <Route path="/category/:id">
-            <ItemList/>          
-          </Route>   
-          <Route path="/item/:itemId">
-            <ItemDetailContainer/>      
-          </Route>   
-          <Route path="/cart">
-            <Cart/>      
-          </Route>               
+          <Route exact path="/" component={ItemList}/>           
+          <Route path="/category/:id" component={ItemList}/>           
+          <Route path="/item/:itemId" component={ItemDetailContainer}/>          
+          <Route path="/cart" component={Cart}/>                     
         </Switch>    
       </BrowserRouter>      
     )

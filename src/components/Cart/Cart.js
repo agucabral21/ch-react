@@ -1,5 +1,5 @@
 import React from "react";
-import { CartCtxConsumer } from "../../CartContext";
+import { CartCtxConsumer } from "../../contexts/CartContext";
 import CartItem from "./CartItem";
 
 
@@ -19,12 +19,10 @@ function Cart(){
             <div className="table-responsive">
             <table className="table table-sm">
                 <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Cantidad</th>
+                <tr>                    
                     <th scope="col">Nombre</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Color</th>
+                    <th scope="col">Precio</th>                     
                     <th scope="col">Cantidad</th>
                 </tr>
                 </thead>

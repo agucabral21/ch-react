@@ -1,64 +1,57 @@
-const products = 
-    [
+const products =     [
         {
             id:"1",
-            name:"Iphone X",
+            label:"Iphone X",
             description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-            color:"rojo",
             stock:11,
-            image:"https://cdn.baymard.com/blog/ux-product-image-categories-5-proportion-size-2.jpg",
-            precio:100,
-            category:"tech"
+            imageId:"https://cdn.vox-cdn.com/thumbor/E8c5U6A_RrsyiwRANmcCLNE2dzc=/0x0:2040x1360/1400x933/filters:focal(860x560:1186x886):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/55855309/akrales_190913_3628_0277.19.jpg",
+            price:100,
+            categoryId:"tech"
         },
         {
             id:"2",
-            name:"Samsung Alpha",
+            label:"Samsung Alpha",
             description:"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium",
-            color:"azul",
             stock:4,
-            image:"https://cdn.baymard.com/blog/ux-product-image-categories-5-proportion-size-2.jpg",
-            precio:231,
-            category:"tech"
+            imageId:"https://cdn.vox-cdn.com/thumbor/E8c5U6A_RrsyiwRANmcCLNE2dzc=/0x0:2040x1360/1400x933/filters:focal(860x560:1186x886):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/55855309/akrales_190913_3628_0277.19.jpg",
+            price:231,
+            categoryId:"tech"
         },
         {
             id:"3",
-            name:"Xiaomi Note 9",
+            label:"Xiaomi Note 9",
             description:"Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam",
-            color:"verde",
             stock:22,
-            image:"https://cdn.baymard.com/blog/ux-product-image-categories-5-proportion-size-2.jpg",
-            precio:20,
-            category:"tech"
+            imageId:"https://cdn.vox-cdn.com/thumbor/E8c5U6A_RrsyiwRANmcCLNE2dzc=/0x0:2040x1360/1400x933/filters:focal(860x560:1186x886):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/55855309/akrales_190913_3628_0277.19.jpg",
+            price:20,
+            categoryId:"tech"
         },
         {
             id:"4",
-            name:"Perfume Kenzo",
+            label:"Perfume Kenzo",
             description:"Quis autem vel eum iure reprehenderit qui in ea voluptate",
-            color:"blanco",
             stock:5,
-            image:"https://cdn.baymard.com/blog/ux-product-image-categories-5-proportion-size-2.jpg",
-            precio:111,
-            category:"cosmetics"
+            imageId:"https://cdn2.dineroenimagen.com/media/dinero/styles/xlarge/public/images/2019/04/perfume-px.jpg",
+            price:111,
+            categoryId:"cosmetics"
         },
         {
             id:"5",
-            name:"Perfume DC",
+            label:"Perfume DC",
             description:"Quis autem vel eum iure reprehenderit qui in ea voluptate",
-            color:"blanco",
             stock:2,
-            image:"https://cdn.baymard.com/blog/ux-product-image-categories-5-proportion-size-2.jpg",
-            precio:222,
-            category:"cosmetics"
+            imageId:"https://cdn2.dineroenimagen.com/media/dinero/styles/xlarge/public/images/2019/04/perfume-px.jpg",
+            price:222,
+            categoryId:"cosmetics"
         },
         {
             id:"6",
-            name:"Perfume de Mujer",
+            label:"Perfume de Mujer",
             description:"Quis autem vel eum iure reprehenderit qui in ea voluptate",
-            color:"blanco",
             stock:44,
-            image:"https://cdn.baymard.com/blog/ux-product-image-categories-5-proportion-size-2.jpg",
-            precio:333,
-            category:"cosmetics"
+            imageId:"https://cdn2.dineroenimagen.com/media/dinero/styles/xlarge/public/images/2019/04/perfume-px.jpg",
+            price:333,
+            categoryId:"cosmetics"
         }
     ]
 const getProducts =  (cat) =>  new Promise((resolve,reject) => {
@@ -66,7 +59,7 @@ const getProducts =  (cat) =>  new Promise((resolve,reject) => {
                                     resolve(
                                         (cat === "random") ? 
                                         [getRandomProduct()] :                                        
-                                        products.filter(x => x.category === cat || cat === "all")
+                                        products.filter(x => x.categoryId === cat || cat === "all")
                                     );                                
                                 },0)
                          });
