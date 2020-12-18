@@ -1,7 +1,9 @@
-function getAllItems(DB){
-    const items = DB.collection("items");
-    return new Promise((resolve,reject)=>{
-        items.get().then((result)=>{        
+import {storeDB} from "./FirebaseDS"
+
+function getAllItems(category){    
+    const items = storeDB.collection("items");
+    return new Promise((resolve,reject)=>{       
+        items.get().then((result)=>{            
             if(result.size === 0){            
                 reject("No hay resultados")
             }
@@ -14,18 +16,22 @@ function getAllItems(DB){
         }).catch(e => {
             console.log(e)
             reject(e)
-        })      
+        })   
     });
 };
 
-function getItemById(DB,id){
-    const items = DB.collection("items");
+function getItemById(id){
+    const items = storeDB.collection("items");    
     return new Promise((resolve,reject)=>{
+        
         items
         .doc(id)
         .get()
-        .then(e => resolve(e.data()));
-           
+        .then(d => {
+            var ret = d.data()
+            Object.assign(ret, {id:d.id})
+            resolve(ret)
+        });           
     })    
 };
 

@@ -9,13 +9,11 @@ import 'font-awesome/css/font-awesome.min.css';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import FirebaseConn , {FirebaseContext} from './components/FirebaseDB/FirebaseDS';
+
 
 ReactDOM.render(
-  <React.StrictMode>
-    <FirebaseContext.Provider value={new FirebaseConn()}>
-    <App />
-    </FirebaseContext.Provider>
+  <React.StrictMode>   
+    <App />   
   </React.StrictMode>,
   document.getElementById('root')
 );

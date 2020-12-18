@@ -1,20 +1,21 @@
-import React from "react";
-import { CartCtxConsumer } from "../../contexts/CartContext";
+import React, {useContext} from "react";
+import CartContext from "../../contexts/CartContext";
 import CartItem from "./CartItem";
 
 
 function Cart(){
 
+
+    const cartCtx = useContext(CartContext);
+
     function generateCartItems(cartItemsArray){        
-        return cartItemsArray.map(iCart => {           
-            return  <CartItem cartItem={iCart}/>
+        return cartItemsArray.map((iCart) => {           
+            return  <CartItem key={iCart.item.id} cartItem={iCart}/>
         })        
     } 
 
     return(
-        <CartCtxConsumer>{cartCtx => (
-            
-            cartCtx.cart.length === 0 ?
+            cartCtx.cart.items.length === 0 ?
             <div className="table-responsive">no hay items ameo</div> :
             <div className="table-responsive">
             <table className="table table-sm">
@@ -27,13 +28,10 @@ function Cart(){
                 </tr>
                 </thead>
                 <tbody>
-                    {generateCartItems(cartCtx.cart)}
+                    {generateCartItems(cartCtx.cart.items)}
                 </tbody>
             </table>
             </div>
-            
-            )}
-        </CartCtxConsumer>
     )
 };
 

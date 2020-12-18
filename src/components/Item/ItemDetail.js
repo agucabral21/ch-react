@@ -1,15 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import {Card,ButtonGroup,ButtonToolbar,Button} from "react-bootstrap";
 import ItemCount from "./ItemCount";
-import {CartCtxConsumer} from "../../contexts/CartContext";
+import CartContext from "../../contexts/CartContext";
 
 function ItemDetail({item}) {
 
     const [count,setCount] = useState(0);
+    const cartCtx = useContext(CartContext);
     
     return(
-        <CartCtxConsumer>
-        {cartCtx => (
+       
             <Card style={{ width: '18rem' }}>
                 <Card.Img variant="top" src={process.env.PUBLIC_URL+"/images/"+item.imageId} />
                 <hr/>
@@ -19,13 +19,28 @@ function ItemDetail({item}) {
                 <ItemCount min="0" max={item.stock} changeCount={(c) => setCount(c)}></ItemCount> 
                 <ButtonToolbar className="justify-content-between">
                 <ButtonGroup>
-                    <Button onClick={() => {cartCtx.addItem(item,count)}}>Comprar {count}</Button>
+                    <Button onClick={() => 
+                        {cartCtx.cartDispatch(
+                            {type:"ADD_ITEM",
+                             payload:{
+                                 item:item,
+                                 count:count
+                             }}
+                         )}}>Comprar {count}</Button>
+
+<Button onClick={() => 
+                        {cartCtx.cartDispatch(
+                            {type:"con",
+                             payload:{
+                                 item:item,
+                                 count:count
+                             }}
+                         )}}>Consola {count}</Button>
                 </ButtonGroup>
                 </ButtonToolbar>
                 </Card.Body>
             </Card>  
-        )}
-        </CartCtxConsumer>
+        
     )
 }  
 

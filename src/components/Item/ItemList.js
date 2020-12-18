@@ -4,7 +4,7 @@ import Item from "./Item.js";
 import { Spinner, Container,Dropdown } from "react-bootstrap";
 import {getAllItems} from "../FirebaseDB/FirebaseQueries"
 
-function ItemList({DB}) {
+function ItemList() {
     
     const [productArray,setProductArray] = useState([]);
     const [category,setCategory] = useState("all");
@@ -12,7 +12,7 @@ function ItemList({DB}) {
 
     function loadProducts(){
         setLoading(true)       
-        getAllItems(DB).then(res =>{            
+        getAllItems().then(res =>{            
             setProductArray(res)
             setLoading(false)
         }).catch((e) => {
