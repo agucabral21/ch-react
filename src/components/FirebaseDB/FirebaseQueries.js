@@ -1,4 +1,5 @@
 import { storeDB } from "./FirebaseDS";
+import _ from "lodash";
 
 function fetchItems(category) {
   const items = storeDB.collection("items");
@@ -177,4 +178,14 @@ function storeItem(item) {
   storeDB.collection("items").doc(id).set(item);
 }
 
-export { fetchItems, fetchItemById, storeItem, storeTestData };
+function storeOrder(order) {
+  var id = new Date().valueOf();
+  console.log(order);
+  //console.log(item);
+  return storeDB
+    .collection("orders")
+    .doc(id.toString() + "-" + order.buyer.phone)
+    .set(order);
+}
+
+export { fetchItems, fetchItemById, storeItem, storeTestData, storeOrder };

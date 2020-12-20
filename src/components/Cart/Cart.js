@@ -15,23 +15,24 @@ function Cart() {
   return (
     <Container>
       <div className="table-responsive">
-        {cartCtx.cart.items.length === 0 ? (
-          <h1>El carrito esta vacio.</h1>
-        ) : (
-          <table className="table table-sm">
-            <thead>
-              <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Cantidad</th>
-                <th scope="col">Total</th>
-                <th scope="col">Opciones</th>
-              </tr>
-            </thead>
-            <tbody>{generateCartItems(cartCtx.cart.items)}</tbody>
-          </table>
-        )}
+        <h2>Carrito</h2>
+        <table className="table table-sm">
+          <thead>
+            <tr>
+              <th style={{ width: "20%" }} scope="col">
+                Nombre
+              </th>
+              <th scope="col">Descripcion</th>
+              <th scope="col">Precio</th>
+              <th scope="col">Cantidad</th>
+              <th scope="col">Total</th>
+              <th scope="col">Opciones</th>
+            </tr>
+          </thead>
+          <tbody>{generateCartItems(cartCtx.cart.items)}</tbody>
+        </table>
+
+        <h1>Total:{cartCtx.cart.totalPrice}</h1>
       </div>
     </Container>
   );

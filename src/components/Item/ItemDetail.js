@@ -7,6 +7,7 @@ import {
   Row,
   Image,
   Col,
+  Alert,
 } from "react-bootstrap";
 import ItemCount from "./ItemCount";
 import CartContext from "../../contexts/CartContext";
@@ -14,6 +15,12 @@ import CartContext from "../../contexts/CartContext";
 function ItemDetail({ item }) {
   const [count, setCount] = useState(0);
   const cartCtx = useContext(CartContext);
+  const [result, setResult] = useState("hide");
+
+  const showResult = (type) => {
+    setResult(type);
+    setTimeout(() => setResult("hide"), 3000);
+  };
 
   return (
     <div className="container">
@@ -52,12 +59,20 @@ function ItemDetail({ item }) {
                         count: count,
                       },
                     });
+                    showResult("success");
                   }}
                 >
                   Comprar {count}
                 </Button>
               </ButtonGroup>
             </ButtonToolbar>
+          </Row>
+          <Row>
+            {result !== "hide" ? (
+              <Alert key={result} variant={result}>
+                Has agregado {count} {item.label} a tu carrito!
+              </Alert>
+            ) : null}
           </Row>
         </Col>
       </Row>

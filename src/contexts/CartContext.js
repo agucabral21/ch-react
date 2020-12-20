@@ -29,6 +29,9 @@ const cartReducer = (cart, action) => {
                 : cartItem
             ),
             totalItems: cart.totalItems + action.payload.count,
+            totalPrice:
+              cart.totalPrice +
+              action.payload.item.price * action.payload.count,
           }
         : {
             ...cart,
@@ -37,6 +40,9 @@ const cartReducer = (cart, action) => {
               { item: action.payload.item, count: action.payload.count },
             ],
             totalItems: cart.totalItems + action.payload.count,
+            totalPrice:
+              cart.totalPrice +
+              action.payload.item.price * action.payload.count,
           };
     }
     case "REMOVE": {
@@ -50,6 +56,9 @@ const cartReducer = (cart, action) => {
               (cartItem) => cartItem.item.id !== action.payload.item.id
             ),
             totalItems: cart.totalItems - cartItemToDelete.count,
+            totalPrice:
+              cart.totalPrice -
+              cartItemToDelete.item.price * cartItemToDelete.count,
           }
         : { cart };
     }
