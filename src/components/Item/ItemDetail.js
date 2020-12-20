@@ -1,49 +1,68 @@
-import React, {useState, useContext} from "react";
-import {Card,ButtonGroup,ButtonToolbar,Button} from "react-bootstrap";
+import React, { useState, useContext } from "react";
+import {
+  Card,
+  ButtonGroup,
+  ButtonToolbar,
+  Button,
+  Row,
+  Image,
+  Col,
+} from "react-bootstrap";
 import ItemCount from "./ItemCount";
 import CartContext from "../../contexts/CartContext";
 
-function ItemDetail({item}) {
+function ItemDetail({ item }) {
+  const [count, setCount] = useState(0);
+  const cartCtx = useContext(CartContext);
 
-    const [count,setCount] = useState(0);
-    const cartCtx = useContext(CartContext);
-    
-    return(
-       
-            <Card style={{ width: '18rem' }}>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL+"/images/"+item.imageId} />
-                <hr/>
-                <Card.Body>
-                <Card.Title>{item.label}</Card.Title>
-                <Card.Text>{item.description}</Card.Text>
-                <ItemCount min="0" max={item.stock} changeCount={(c) => setCount(c)}></ItemCount> 
-                <ButtonToolbar className="justify-content-between">
-                <ButtonGroup>
-                    <Button onClick={() => 
-                        {cartCtx.cartDispatch(
-                            {type:"ADD_ITEM",
-                             payload:{
-                                 item:item,
-                                 count:count
-                             }}
-                         )}}>Comprar {count}</Button>
+  return (
+    <div className="container">
+      <Row>
+        <Col>
+          <Image
+            src={process.env.PUBLIC_URL + "/images/" + item.imageId}
+            fluid
+          />
+        </Col>
 
-<Button onClick={() => 
-                        {cartCtx.cartDispatch(
-                            {type:"con",
-                             payload:{
-                                 item:item,
-                                 count:count
-                             }}
-                         )}}>Consola {count}</Button>
-                </ButtonGroup>
-                </ButtonToolbar>
-                </Card.Body>
-            </Card>  
-        
-    )
-}  
-
+        <Col>
+          <Row>
+            {" "}
+            <h1>{item.label}</h1>
+          </Row>
+          <Row>
+            <Card.Text>{item.description}</Card.Text>
+          </Row>
+          <Row className="justify-content-md-center">
+            <ItemCount
+              min="0"
+              max={item.stock}
+              changeCount={(c) => setCount(c)}
+            ></ItemCount>
+          </Row>
+          <Row className="justify-content-md-center">
+            <ButtonToolbar>
+              <ButtonGroup>
+                <Button
+                  onClick={() => {
+                    cartCtx.cartDispatch({
+                      type: "ADD_ITEM",
+                      payload: {
+                        item: item,
+                        count: count,
+                      },
+                    });
+                  }}
+                >
+                  Comprar {count}
+                </Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+          </Row>
+        </Col>
+      </Row>
+    </div>
+  );
+}
 
 export default ItemDetail;
-  
