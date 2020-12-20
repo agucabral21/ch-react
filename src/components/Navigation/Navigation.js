@@ -1,11 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CartContext from "../../contexts/CartContext";
 import { NavLink } from "react-router-dom";
-
-import { Container } from "react-bootstrap";
+import { fetchCategories } from "../FirebaseDB/FirebaseQueries";
 
 function Navigation() {
   const cartCtx = useContext(CartContext);
+  const [categories, setCategories] = useState([]);
+
+  const loadCategories = () => {
+    fetchCategories()
+      .then((res) => {
+        setCategories(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => loadCategories(), []);
 
   return (
     <div>
@@ -32,27 +44,27 @@ function Navigation() {
                 className="dropdown-menu"
                 aria-labelledby="navbarDropdownMenuLink"
               >
-                <NavLink
-                  activeClassName="active"
-                  className="nav-item dropdown-item"
-                  to={"/category/samsung"}
-                >
-                  Samsung
-                </NavLink>
-                <NavLink
-                  activeClassName="active"
-                  className="nav-item dropdown-item"
-                  to={"/category/apple"}
-                >
-                  Apple
-                </NavLink>
-                <NavLink
-                  activeClassName="active"
-                  className="nav-item dropdown-item"
-                  to={"/category/xiaomi"}
-                >
-                  Xiaomi
-                </NavLink>
+                {
+                  categories.map((cat) => {
+                    return (
+                      <NavLink
+                        activeClassName="active"
+                        className="nav-item dropdown-item"
+                        to={"/category/" + cat.key}
+                      >
+                        {cat.label}
+                      </NavLink>
+                    );
+                  }) /*let comp = (
+            <NavLink
+              activeClassName="active"
+              className="nav-item dropdown-item"
+              to={"/category/" + cat.key}
+            >
+              {cat.label}
+            </NavLink>
+                );*/
+                }
                 <NavLink
                   exact={true}
                   activeClassName="active"

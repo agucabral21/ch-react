@@ -1,15 +1,19 @@
 import React, { useContext } from "react";
 import Cart from "./Cart";
-import { Row, Col, Container, Form, Button } from "react-bootstrap";
+import { Row, Col, Container } from "react-bootstrap";
 import CartContext from "../../contexts/CartContext";
 import Checkout from "./Checkout";
+import HomeButton from "../Common/HomeButton";
 
 function CartView() {
   const cartCtx = useContext(CartContext);
   return (
     <Container>
       {cartCtx.cart.items.length === 0 ? (
-        <h1>El carrito esta vacio.</h1>
+        <div>
+          <h3>El carrito esta vacio.</h3>
+          <HomeButton />
+        </div>
       ) : (
         <Row>
           <Col sm={8}>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Item from "./Item.js";
 //import  {getProducts} from "../../services/restServices";
-import { Spinner, Container } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { fetchItems } from "../FirebaseDB/FirebaseQueries";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import ChSpinner from "../Common/ChSpinner";
 
 function ItemList() {
   let { catId } = useParams("all");
@@ -59,7 +60,7 @@ function ItemList() {
           </table>
         </div>
       ) : null}
-      {loading ? <Spinner animation="border" /> : null}
+      {loading ? <ChSpinner /> : null}
     </Container>
   );
 }

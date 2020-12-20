@@ -31,7 +31,6 @@ function ItemDetail({ item }) {
             fluid
           />
         </Col>
-
         <Col>
           <Row>
             {" "}
@@ -75,6 +74,7 @@ function ItemDetail({ item }) {
             ) : null}
           </Row>
         </Col>
+        <Col />
       </Row>
     </div>
   );
