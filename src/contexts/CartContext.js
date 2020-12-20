@@ -1,4 +1,4 @@
-import React, {useState, useReducer} from "react";
+import React, {useReducer} from "react";
 //Contextos react
 //https://www.freecodecamp.org/news/react-context-in-5-minutes/
 const CartContext = React.createContext();

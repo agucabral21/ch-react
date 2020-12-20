@@ -2,17 +2,21 @@ import React, {useEffect, useState} from "react";
 import Item from "./Item.js";
 //import  {getProducts} from "../../services/restServices";
 import { Spinner, Container,Dropdown } from "react-bootstrap";
-import {getAllItems} from "../FirebaseDB/FirebaseQueries"
+import {fetchItems} from "../FirebaseDB/FirebaseQueries"
+import {useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 function ItemList() {
     
+    let { catId } = useParams("all");
     const [productArray,setProductArray] = useState([]);
     const [category,setCategory] = useState("all");
     const [loading,setLoading] = useState(true);    
 
-    function loadProducts(){
+
+    function loadProducts(){    
         setLoading(true)       
-        getAllItems().then(res =>{            
+        fetchItems(catId?catId:"all").then(res =>{            
             setProductArray(res)
             setLoading(false)
         }).catch((e) => {
@@ -21,20 +25,16 @@ function ItemList() {
         })      
     }
    
-    useEffect(loadProducts,[category]);  
+    useEffect(loadProducts,[catId]);  
 
     return (   
         <Container>
-        <Dropdown onSelect={(e,o) =>  setCategory(e) }>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                Categorias
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-                <Dropdown.Item eventKey="tech">Tecnologia</Dropdown.Item>
-                <Dropdown.Item eventKey="cosmetics">Cosmetica</Dropdown.Item>
-                <Dropdown.Item eventKey="random">Producto Aleatorio</Dropdown.Item>
-            </Dropdown.Menu>
-        </Dropdown>
+         <h1>Productos {catId ?          
+          <button type="button" class="btn btn-info">
+            {"Categoria: "+catId+" "}  
+            <Link to={"/"}><span class="badge badge-light">  x</span></Link>
+          </button>                    
+          : null}</h1>
         { !loading ? 
         <div className="table-responsive">
             <table className="table table-sm">

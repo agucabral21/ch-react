@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 */
 import {Spinner,Container} from "react-bootstrap";
-import {getItemById} from "../FirebaseDB/FirebaseQueries"
+import {fetchItemById} from "../FirebaseDB/FirebaseQueries";
 
 function ItemDetailContainer() {
     
@@ -15,7 +15,7 @@ function ItemDetailContainer() {
     const {itemId} = useParams();
 
     useEffect(() => {
-        getItemById(itemId).then(res => {            
+        fetchItemById(itemId).then(res => {            
             setItem(res);
             setShowCard(true);
         })
