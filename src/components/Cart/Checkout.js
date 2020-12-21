@@ -12,24 +12,28 @@ function Checkout() {
   const [phone, setPhone] = useState("");
   const [storeResult, setStoreResult] = useState("hide");
 
-  const checkErrors = () => {
-    console.log(mailCheck);
-    if (mailCheck !== mail) {
-      if (!errors.includes("mailCheck")) setErrors([...errors, "mailCheck"]);
-    } else {
-      console.log("quito");
-      setErrors(errors.filter((e) => e !== "mailCheck"));
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+
+    /*let checkMail = () => {
+      if (mailCheck !== mail) {
+        if (!errors.includes("mailCheck")) setErrors([...errors, "mailCheck"]);
+      } else {
+        setErrors(errors.filter((e) => e !== "mailCheck"));
+      }
+      return errors.length !== 0;
+    };
+    let validations = checkMail();
+    console.log(form.checkValidity);
+    console.log(validations === false);
+    console.log(form.checkValidity() === false);
+    */
+
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
     }
-  };
-
-  const showResult = (type) => {
-    setStoreResult(type);
-    setTimeout(() => setStoreResult("hide"), 5000);
-  };
-
-  const checkout = (evt) => {
-    checkErrors();
-    console.log(errors);
+    console.log("llega");
 
     storeOrder({
       ...cartCtx.cart,
@@ -45,17 +49,23 @@ function Checkout() {
       .catch((error) => {
         console.error(error);
       });
+    console.log("llega");
+    event.preventDefault();
+  };
 
-    evt.preventDefault();
+  const showResult = (type) => {
+    setStoreResult(type);
+    setTimeout(() => setStoreResult("hide"), 5000);
   };
 
   return (
     <Container>
       <h1>Checkout</h1>
-      <Form onSubmit={checkout}>
+      <Form onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicName">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
+            required
             type="text"
             placeholder="Nombre"
             value={name}
@@ -65,6 +75,7 @@ function Checkout() {
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Mail</Form.Label>
           <Form.Control
+            required
             type="email"
             placeholder="Mail"
             value={mail}
@@ -77,27 +88,26 @@ function Checkout() {
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Repite tu Mail</Form.Label>
           <Form.Control
-            className={
-              errors.includes("mailCheck")
-                ? "form-control is-invalid"
-                : "form-control"
-            }
-            type="email1"
+            required
+            type="email"
             placeholder="Mail"
             value={mailCheck}
+            pattern={mail}
             onChange={(e) => setMailCheck(e.target.value)}
           />
         </Form.Group>
         <Form.Group controlId="formBasicPhone">
           <Form.Label>Telefono</Form.Label>
           <Form.Control
-            type="text"
+            required
+            type="phone"
             placeholder="Telefono"
             value={phone}
+            pattern="^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$"
             onChange={(e) => setPhone(e.target.value)}
           />
         </Form.Group>
-        <Button variant="primary" onClick={checkout}>
+        <Button variant="primary" type="submit">
           Confirmar
         </Button>
       </Form>
