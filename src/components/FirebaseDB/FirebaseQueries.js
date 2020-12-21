@@ -22,6 +22,28 @@ function fetchCategories() {
   });
 }
 
+function fetchOrders() {
+  const items = storeDB.collection("orders");
+  return new Promise((resolve, reject) => {
+    items
+      .get()
+      .then((result) => {
+        if (result.size === 0) {
+          reject("No hay resultados");
+        }
+        let res = result.docs.map((d) => {
+          var ret = d.data();
+          Object.assign(ret, { id: d.id });
+          return ret;
+        });
+        resolve(res);
+      })
+      .catch((e) => {
+        reject(e);
+      });
+  });
+}
+
 function fetchItems(category) {
   const items = storeDB.collection("items");
   return new Promise((resolve, reject) => {
@@ -87,6 +109,24 @@ function fetchItemById(id) {
   });
 }
 
+function fetchOrderById(id) {
+  const items = storeDB.collection("orders");
+  return new Promise((resolve, reject) => {
+    items
+      .doc(id)
+      .get()
+      .then((d) => {
+        if (d.exists) {
+          var ret = d.data();
+          Object.assign(ret, { id: d.id });
+          resolve(ret);
+        } else {
+          reject("NotFound");
+        }
+      });
+  });
+}
+
 const storeTestData = () => {
   console.log(testData);
   //Descomentar en caso de querer cargar la base de datos
@@ -115,4 +155,6 @@ export {
   storeTestData,
   storeOrder,
   fetchCategories,
+  fetchOrders,
+  fetchOrderById,
 };

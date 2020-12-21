@@ -10,7 +10,6 @@ import ChSpinner from "../Common/ChSpinner";
 function ItemList() {
   let { catId } = useParams("all");
   const [productArray, setProductArray] = useState([]);
-  const [category, setCategory] = useState("all");
   const [loading, setLoading] = useState(true);
 
   function loadProducts() {

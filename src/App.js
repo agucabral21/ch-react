@@ -6,6 +6,7 @@ import ItemList from "./components/Item/ItemList";
 import CartView from "./components/Cart/CartView";
 import ItemDetailContainer from "./components/Item/ItemDetailContainer.js";
 import AdminConsole from "./components/Admin/AdminConsole";
+import OrderView from "./components/Admin/OrderView";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           </Route>
           <Route path="/cart" component={CartView} />
           <Route path="/admin" component={AdminConsole} />
+          <Route path="/order/:orderId" component={OrderView} />
         </Switch>
       </BrowserRouter>
     </CartCtxProvider>

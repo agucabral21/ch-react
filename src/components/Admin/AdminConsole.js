@@ -1,21 +1,16 @@
-import React, { useContext } from "react";
-import CartContext from "../../contexts/CartContext";
+import React from "react";
+//import CartContext from "../../contexts/CartContext";
 import { ButtonGroup, Button, Container, Row } from "react-bootstrap";
 import { storeTestData } from "../FirebaseDB/FirebaseQueries";
 import ChSpinner from "../Common/ChSpinner";
+import OrderList from "./OrderList";
 
 function AdminConsole() {
-  const cartCtx = useContext(CartContext);
   return (
     <Container>
-      <h2>Opciones</h2>
+      <h2>Lista de Ordenes</h2>
       <br />
-      <ButtonGroup>
-        <Button onClick={storeTestData}>CargarBase con Datos defecto</Button>{" "}
-      </ButtonGroup>
-      <Row>
-        <ChSpinner size="bg" />
-      </Row>
+      <OrderList></OrderList>
     </Container>
   );
 }
