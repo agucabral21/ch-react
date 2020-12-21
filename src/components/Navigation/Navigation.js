@@ -85,13 +85,13 @@ function Navigation() {
                 {cartCtx.cart.totalItems}
               </span>
             </NavLink>
-            <NavLink
+            {/*<NavLink
               activeClassName="active"
               className="nav-item nav-link"
               to={"/admin"}
             >
               Admin
-            </NavLink>
+           </NavLink>*/}
           </ul>
         </div>
       </nav>

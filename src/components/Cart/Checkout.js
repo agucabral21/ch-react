@@ -2,19 +2,19 @@ import React, { useState, useContext } from "react";
 import { Container, Form, Button, Row, Alert } from "react-bootstrap";
 import CartContext from "../../contexts/CartContext";
 import { storeOrder } from "../FirebaseDB/FirebaseQueries";
+import ChSpinner from "../Common/ChSpinner";
 
 function Checkout() {
   const cartCtx = useContext(CartContext);
   const [name, setName] = useState("");
   const [mail, setMail] = useState("");
   const [mailCheck, setMailCheck] = useState("");
-  const [errors, setErrors] = useState([]);
   const [phone, setPhone] = useState("");
   const [storeResult, setStoreResult] = useState("hide");
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-
+    setStoreResult("storing");
     /*let checkMail = () => {
       if (mailCheck !== mail) {
         if (!errors.includes("mailCheck")) setErrors([...errors, "mailCheck"]);
@@ -112,11 +112,13 @@ function Checkout() {
         </Button>
       </Form>
       <Row>
-        {storeResult !== "hide" ? (
+        {storeResult === "success" ? (
           <Alert key={storeResult} variant={storeResult}>
             Tu orden se ha procesado correctamente!
           </Alert>
         ) : null}
+
+        {storeResult === "storing" ? <ChSpinner message="Confirmando" /> : null}
       </Row>
     </Container>
   );

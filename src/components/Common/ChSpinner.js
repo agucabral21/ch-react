@@ -2,12 +2,14 @@ import React from "react";
 
 import { Spinner, Row, Col } from "react-bootstrap";
 
-function ChSpinner({ size }) {
+function ChSpinner({ message }) {
   return (
     <Row>
       <Col className="justify-content-md-center">
-        <h2>Cargando</h2>
-        <Spinner size={size} animation={"border"}></Spinner>
+        <h4>
+          {message ? message : "Cargando"}{" "}
+          <Spinner animation={"border"}></Spinner>
+        </h4>
       </Col>
     </Row>
   );

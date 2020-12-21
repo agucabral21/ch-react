@@ -43,7 +43,7 @@ function ItemList() {
       </h1>
       <br />
       {!loading ? (
-        <div className="table-responsive">
+        <div className="table-responsive" style={{ height: "400px" }}>
           <table className="table table-sm">
             <thead>
               <tr>
